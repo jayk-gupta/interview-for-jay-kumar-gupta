@@ -1,5 +1,3 @@
-// src/components/columns.tsx
-
 import type { ColumnDef } from "@tanstack/react-table";
 
 export interface Launch {
@@ -8,10 +6,16 @@ export interface Launch {
   success: boolean | null;
   upcoming: boolean;
   rocket: string;
+  flight_number: number;
   launchpad: string;
   details?: string;
   links: {
-    webcast?: string;
+    patch: {
+      small: string;
+      large: string;
+    };
+    webcast: string;
+    wikipedia: string;
   };
   id: string;
 }
@@ -48,7 +52,7 @@ export const columns: ColumnDef<Launch>[] = [
   {
     accessorKey: "orbit",
     header: "Orbit",
-    cell: () => <span className="text-gray-400">LEO</span>, 
+    cell: () => <span className="text-gray-400">LEO</span>,
   },
   {
     accessorKey: "success",
@@ -57,9 +61,23 @@ export const columns: ColumnDef<Launch>[] = [
       const success = row.original.success;
       const upcoming = row.original.upcoming;
 
-      if (upcoming) return <span className="text-yellow-500">Upcoming</span>;
-      if (success) return <span className="text-green-600">Success</span>;
-      return <span className="text-red-500">Failed</span>;
+      if (upcoming)
+        return (
+          <span className="text-yellow-700 bg-yellow-100 px-2 p1 rounded-xl">
+            Upcoming
+          </span>
+        );
+      if (success)
+        return (
+          <span className="text-green-700 bg-green-100 px-2 p1 rounded-xl">
+            Success
+          </span>
+        );
+      return (
+        <span className="text-red-700 bg-red-100 px-2 p1 rounded-xl">
+          Failed
+        </span>
+      );
     },
   },
   {

@@ -1,14 +1,16 @@
-
-import{ useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { getAllLaunches } from "@/services/spaceXAPI";
 import { DataTable } from "./ui/DataTable";
 import { columns } from "./columns";
 import type { Launch } from "./columns";
+import LaunchTableSkeleton from "./ui/LaunchTableSkeleton";
+import { LaunchDetailModal } from "./LaunchDetailModal";
 
 function LaunchTable() {
   const [data, setData] = useState<Launch[]>([]);
   const [loading, setLoading] = useState(true);
   const [page, setPage] = useState(1);
+  const [selectedLaunch, setSelectedLaunch] = useState<Launch | null>(null);
   const pageSize = 10;
 
   useEffect(() => {
@@ -26,17 +28,24 @@ function LaunchTable() {
 
   return (
     <div className="w-full mt-6">
-      <h2 className="text-xl font-semibold mb-4">SpaceX Launches</h2>
-      {loading ? (
-        <p className="text-gray-600">Loading...</p>
+      {data.length === 0 && loading ? (
+        <LaunchTableSkeleton />
       ) : (
-        <DataTable
-          data={currentPageData}
-          columns={columns}
-          page={page}
-          setPage={setPage}
-          totalPages={totalPages}
-        />
+        <>
+          <DataTable
+            data={currentPageData}
+            columns={columns}
+            page={page}
+            setPage={setPage}
+            totalPages={totalPages}
+            onRowClick={setSelectedLaunch}
+          />
+          <LaunchDetailModal
+            isOpen={!!selectedLaunch}
+            onClose={() => setSelectedLaunch(null)}
+            launch={selectedLaunch}
+          />
+        </>
       )}
     </div>
   );
