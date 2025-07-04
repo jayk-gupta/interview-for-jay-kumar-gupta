@@ -10,7 +10,7 @@ function LaunchTable() {
   const [data, setData] = useState<Launch[]>([]);
   const [loading, setLoading] = useState(true);
   const [page, setPage] = useState(1);
-  const [selectedLaunch, setSelectedLaunch] = useState<Launch | null>(null);
+  const [selectedLaunchId, setSelectedLaunchId] = useState<string | null>(null);
   const pageSize = 10;
 
   useEffect(() => {
@@ -38,12 +38,12 @@ function LaunchTable() {
             page={page}
             setPage={setPage}
             totalPages={totalPages}
-            onRowClick={setSelectedLaunch}
+            onRowClick={(launch)=> setSelectedLaunchId(launch.id)}
           />
           <LaunchDetailModal
-            isOpen={!!selectedLaunch}
-            onClose={() => setSelectedLaunch(null)}
-            launch={selectedLaunch}
+            isOpen={!!selectedLaunchId}
+            onClose={() => setSelectedLaunchId(null)}
+            launchId={selectedLaunchId}
           />
         </>
       )}
