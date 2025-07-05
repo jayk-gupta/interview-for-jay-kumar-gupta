@@ -57,7 +57,7 @@ export const LaunchDetailModal: React.FC<LaunchDetailModalProps> = ({
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogOverlay className="bg-black/40 backdrop-blur-sm fixed inset-0 z-50" />
-      <DialogContent className="bg-white max-w-lg w-full rounded-xl p-6 z-50 overflow-y-auto max-h-[90vh] shadow-lg">
+      <DialogContent className="bg-white w-full max-w-sm sm:max-w-lg rounded-xl px-4 sm:px-6 py-6 z-50 overflow-y-auto max-h-[90vh] shadow-lg">
         <div className="flex items-start flex-col gap-4 pb-4">
           <div className="flex gap-4">
             <img
