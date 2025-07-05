@@ -6,7 +6,7 @@ import {
   getRocketById,
   getPayloadById,
 } from "@/services/spaceXAPI";
-import { ExternalLink, Youtube, Globe } from "lucide-react";
+import { ExternalLink} from "lucide-react";
 
 interface LaunchDetailModalProps {
   isOpen: boolean;
@@ -87,7 +87,7 @@ export const LaunchDetailModal: React.FC<LaunchDetailModalProps> = ({
                 </span>
               </div>
               <p className="text-sm text-gray-600 mb-2">{rocket?.name || ""}</p>
-              {/* icons */}
+              {/* Social media Link icons */}
               <div className="flex gap-1">
                 {launch.links?.article && (
                   <a
@@ -146,7 +146,7 @@ export const LaunchDetailModal: React.FC<LaunchDetailModalProps> = ({
           </p>
         </div>
 
-        {/* Info Grid */}
+        {/* Lauunch Info  */}
         <div className="mt-4 text-sm flex flex-col gap-2">
           <InfoRow label="Flight Number" value={launch.flight_number} />
           <InfoRow label="Mission Name" value={launch.name} />

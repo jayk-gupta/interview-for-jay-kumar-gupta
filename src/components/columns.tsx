@@ -8,6 +8,7 @@ export interface Launch {
   rocket: string;
   flight_number: number;
   launchpad: string;
+  date_local: string;
   details?: string;
   links: {
     patch: {

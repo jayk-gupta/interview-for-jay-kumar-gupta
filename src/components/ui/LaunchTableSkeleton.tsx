@@ -1,11 +1,20 @@
 import { Skeleton } from "@/components/ui/skeleton";
+import {
+  Table,
+  TableHeader,
+  TableRow,
+  TableHead,
+  TableBody,
+  TableCell,
+} from "@/components/ui/table";
 
 export default function LaunchTableSkeleton() {
   return (
     <div className="rounded-md border overflow-x-auto">
-      <table className="min-w-[800px] w-full">
-        <thead className="bg-gray-100">
-          <tr>
+      <Table className="min-w-[800px] w-full">
+        {/* Table Header */}
+        <TableHeader className="bg-gray-100 text-base">
+          <TableRow>
             {[
               "No.",
               "Launch Date",
@@ -14,28 +23,33 @@ export default function LaunchTableSkeleton() {
               "Orbit",
               "Launch Status",
               "Rocket",
-            ].map((title, i) => (
-              <th
+            ].map((_, i) => (
+              <TableHead
                 key={i}
-                className="px-4 py-3 text-left text-sm font-medium text-gray-700 border-r"
+                className="text-gray-800 font-semibold border-r px-4 py-3 text-sm sm:text-base"
               >
                 <Skeleton className="h-4 w-24" />
-              </th>
+              </TableHead>
             ))}
-          </tr>
-        </thead>
-        <tbody>
-          {Array.from({ length: 6 }).map((_, rowIdx) => (
-            <tr key={rowIdx} className="border-t">
+          </TableRow>
+        </TableHeader>
+
+        {/* Skeleton Rows */}
+        <TableBody>
+          {Array.from({ length: 10 }).map((_, rowIdx) => (
+            <TableRow key={rowIdx} className="border-t">
               {Array.from({ length: 7 }).map((_, colIdx) => (
-                <td key={colIdx} className="px-4 py-3 border-r">
+                <TableCell
+                  key={colIdx}
+                  className="border-r px-4 py-3 text-sm sm:text-base"
+                >
                   <Skeleton className="h-4 w-full" />
-                </td>
+                </TableCell>
               ))}
-            </tr>
+            </TableRow>
           ))}
-        </tbody>
-      </table>
+        </TableBody>
+      </Table>
     </div>
   );
 }
